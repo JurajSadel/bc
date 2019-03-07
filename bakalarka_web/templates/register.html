@@ -1,0 +1,86 @@
+{% extends "layout.html" %}
+{% block content %}
+    <div > <!-- classa z MAIN.css na krajsi vzhlad -->
+        <form method="POST" action=""> <!-- postne informaciu do aktualneho routu (tam dke moemntalne som), pridam nejake fields -->
+             {{form.hidden_tag() }}                                <!--!!ak chcem pristupovat k premennym v template musim pouzit dvojite {}; pristupujeme k forme, ktoru sme dali ako parameter , hidden_tag() pridava CRSF token/cross-site request forgery token, spolu so SECRET KEY je sucastou ochrany -->
+             <fieldset >  <!-- pridavame nejake HTML a CSS classy class="form-group" je bootstrap, krajsi vzhlad -->
+                    <!--<div >-->
+                        {{ form.username.label(class="form-control-label") }} <!-- pouzijeme fieldsformy, ktore sme predali; vypise label z nasho user name fieldu; chceme tomu dat classu(ppridam () bootstrap pre vzhlad; vyprintfuje form label ) -->
+                        <!-- pre kazdy field ma list errorov  ak bol dany field invalid a my tieto errory mozeme vytisknut v bootstrape::pridam class="isinvalid do fieldu a  a dam div s class="invalid_feedback a dam tam erros"-->
+
+                        {% if form.username.errors %} <!-- ak mame error -->
+                            {{ form.username(class="form-control is-invalid") }} <!-- is-invalid je class -->
+                            <div class="invalid-feedback"> <!-- vypise chybu pri zlom zadani hodnot (malo znakov,...)-->
+                                {% for error in form.username.errors %}
+                                <span> {{ error }}  </span> <!-- priame vypisanie chyb pod labels -->
+                                {% endfor %}
+                             </div>
+                             {% else %}
+                                  {{ form.username(class="form-control ") }}<!-- konkretne okno na vyplnenie username -->
+                        {% endif %}
+                    <!--</div>-->
+                    <div >
+                    {{ form.VUT_id.label(class="form-control-label") }}
+                 {% if form.VUT_id.errors %} <!-- ak mame error -->
+                            {{ form.VUT_id(class="form-control  is-invalid") }} <!-- is-invali je class -->
+                            <div class="invalid-feedback">
+                                {% for error in form.VUT_id.errors %}
+                                <span> {{ error }}  </span>
+                                {% endfor %}
+                             </div>
+                             {% else %}
+                                  {{ form.VUT_id(class="form-control ") }}<!-- chcem field samostatny, form-control-lg = form-control-large; mozem kopirovat pre dalsie form grupy -->
+                        {% endif %}
+                    </div>
+                    <div >
+                        {{ form.email.label(class="form-control-label") }} <!-- pouzijeme fieldsformy, ktore sme predali; vypise label z nasho email fieldu; chceme tomu dat classu(ppridam () bootstrap pre vzhlad; vyprintfuje form label ) -->
+
+                       {% if form.email.errors %} <!-- ak mame error -->
+                            {{ form.email(class="form-control  is-invalid") }} <!-- is-invali je class -->
+                            <div class="invalid-feedback">
+                                {% for error in form.email.errors %}
+                                <span> {{ error }}  </span>
+                                {% endfor %}
+                             </div>
+                             {% else %}
+                                  {{ form.email(class="form-control ") }}<!-- chcem field samostatny, form-control-lg = form-control-large; mozem kopirovat pre dalsie form grupy -->
+                        {% endif %}
+                    </div>
+
+                    <div >
+                        {{ form.password.label(class="form-control-label") }} <!-- pouzijeme fieldsformy, ktore sme predali; vypise label z nasho password fieldu; chceme tomu dat classu(ppridam () bootstrap pre vzhlad; vyprintfuje form label ) -->
+
+                        {% if form.password.errors %} <!-- ak mame error -->
+                            {{ form.password(class="form-control  is-invalid") }} <!-- is-invali je class -->
+                            <div class="invalid-feedback">
+                                {% for error in form.password.errors %}
+                                <span> {{ error }}  </span>
+                                {% endfor %}
+                             </div>
+                             {% else %}
+                                  {{ form.password(class="form-control") }}<!-- chcem field samostatny, form-control-lg = form-control-large; mozem kopirovat pre dalsie form grupy -->
+                        {% endif %}
+                    </div>
+
+                    <div >
+                        {{ form.confirm_password.label(class="form-control-label") }} <!-- pouzijeme fieldsformy, ktore sme predali; vypise label z nasho confirm_password fieldu; chceme tomu dat classu(ppridam () bootstrap pre vzhlad; vyprintfuje form label ) -->
+
+                        {% if form.confirm_password.errors %} <!-- ak mame error -->
+                            {{ form.confirm_password(class="form-control  is-invalid") }} <!-- is-invali je class -->
+                            <div class="invalid-feedback">
+                                {% for error in form.confirm_password.errors %}
+                                <span> {{ error }}  </span>
+                                {% endfor %}
+                             </div>
+                             {% else %}
+                                  {{ form.confirm_password(class="form-control ") }}<!-- chcem field samostatny, form-control-lg = form-control-large; mozem kopirovat pre dalsie form grupy -->
+                        {% endif %}
+                    </div>
+             </fieldset>
+
+             <div ><!-- submit button -->
+                {{ form.submit(class="btn btn-outline-info")}} <!-- button class BTN, btn-outline-info(bootstrap zvyraznenie)-->
+             </div>
+        </form>
+        </div>
+{% endblock content %}
