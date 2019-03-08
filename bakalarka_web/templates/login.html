@@ -1,0 +1,44 @@
+{% extends 'layout.html' %}
+
+{%  block content%}
+<div > <!-- classa z main.css nastavi farbu, padding, bordes, konkretne LISTA v ktorej su username email atd -->
+<form method="POST", action="">
+{{ form.hidden_tag() }}
+<fieldset>
+    <div>
+        {{ form.VUT_id.label(class="form-control-label") }} <!-- prida VUT ID listu -->
+        {% if form.VUT_id.errors %}
+                {{ form.VUT_id(class="form-control form-control-lg is-valid") }}
+    <div class="invalid-feedback">
+        {% for error in form.VUT_id.errors %}
+            <span> {{ error }}</span>
+        {% endfor %}
+    </div>
+        {% else %}
+            {{ form.VUT_id(class="form-control ") }} <!-- label na napisanie mena -->
+        {% endif %}
+</div>
+    <div>
+    {{form.password.label(class="form-control-label") }}
+        {%if form.password.errors %}
+            {{ form.password(class="form-control form-control-lg is-valid") }}
+            <div class="invalid-feedback"> <!-- vypisujem vsetky chyby -->
+                {% for error in form.password.errors %}
+                    <span>{{ error }}</span>
+                {% endfor %}
+            </div>
+            {% else %} <!-- ak nemam chyby -->
+                {{ form.password(class="form-control ") }}
+        {% endif %}
+</div>
+<div class="form-check" > <!-- remember me -->
+{{ form.remember(class="form-check-input") }}
+{{ form.remember.label(class="form-check-label") }}
+</div>
+</fieldset>
+    <div ><!-- submit button -->
+        {{ form.submit(class="btn btn-outline-info")}} <!-- button class BTN, btn-outline-info(bootstrap zvyraznenie)-->
+    </div>
+</form>
+</div>
+{% endblock content%}
