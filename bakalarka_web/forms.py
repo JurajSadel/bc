@@ -1,5 +1,6 @@
 from flask_wtf import FlaskForm
 from bakalarka_web.models import User
+from wtforms.fields.html5 import EmailField
 from wtforms import StringField, PasswordField, SubmitField, BooleanField, ValidationError #StringField meno uzivatela, email Password heslo
 from wtforms.validators import DataRequired, Length, Email, EqualTo  #kvoli validatorom, DataRequired->nemoze ostat nevyplnene,Length povolena dlzka mena
                                                             #Email kvoli validnemu emailu, na potvrdenie emailu EqualTo
@@ -9,11 +10,10 @@ class RegistrationForm(FlaskForm):       #classa RegistrationForm dedi z FlaskFo
     #vnutri=within budeme mat viacere rozdielne formfields
     #user name bude stringField -> nie je importovane z FlaskWDF package ale z FlaskWTF package tiez naisntalovane s pip install flask-wtf
     username=StringField('Username',
-                           validators=[DataRequired(),
-                                       Length(min=5,max = 20)])  #prvy parameter Username bude pouzity ako label v HTML, musime doplnit aby museli nieco zapisat,
+                           validators=[DataRequired(), Length(min=5, max = 20)])  #prvy parameter Username bude pouzity ako label v HTML, musime doplnit aby museli nieco zapisat,
                                         # dlzka mena (validators dalsi argument)-> list toho, co chceme kontrolovat, tiez budu importovane classy
-    VUT_id=StringField('VUT ID', validators=[DataRequired(), Length(min=4,max = 6)])
-    email=StringField('Email',
+    VUT_id=StringField('VUT ID', validators=[DataRequired(), Length(min=4, max = 6)])
+    email=EmailField('Email',
                       validators=[DataRequired(), Email(), Length(max=50)])
     password=PasswordField('Password',
                            validators=[DataRequired()])

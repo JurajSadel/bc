@@ -43,7 +43,7 @@ class File(db.Model):
     filename = db.Column(db.String(20), unique=True, nullable=False)
     path = db.Column(db.String(100), nullable=False)
     beg_display_time = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
-    end_display_time = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+    end_display_time = db.Column(db.DateTime, nullable=False)
     id_user = db.Column(db.Integer, db.ForeignKey('user.user_id'))#foreign key suvisi s primarykey v nadradenej tabulke
     category = db.relationship('Category', secondary=file_category, backref=db.backref('files'), lazy='dynamic')
 

@@ -19,7 +19,7 @@ def about():
 
 @app.route('/register', methods=['GET', 'POST']) #musim pridat list povolenych metod, daljem musim skontrolovat validnost dat a ci mam POST data
 def register():
-    if current_user.is_authenticated: #divne chovanie
+    if current_user.is_authenticated:
         return redirect(url_for('home'))
     form=RegistrationForm(request.form)
     #if form.validate_on_submit():  #flash message umoznuje poslat one-time alert, musim importovat(flash a mozem pridat spravu ktora s avypise pri uspechu
